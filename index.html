@@ -2,20 +2,29 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=375, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
     <title>Chime Transfer</title>
     <style>
+      * {
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+      }
+
       body {
         background: #000;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
           sans-serif;
         margin: 0;
         padding: 0;
+        overflow-x: hidden;
       }
 
       .container {
-        max-width: 375px;
-        margin: 0 auto;
+        width: 100vw;
+        max-width: 100%;
         background: #1a1a1a;
         min-height: 100vh;
         padding: 0;
@@ -26,22 +35,26 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 20px 20px 0 20px;
-        height: 40px;
+        padding: max(env(safe-area-inset-top), 20px) 4vw 0 4vw;
+        height: 60px;
         border-bottom: 1px solid #333;
         padding-bottom: 16px;
         margin-bottom: 8px;
       }
 
       .menu {
-        font-size: 18px;
+        font-size: 5vw;
+        max-font-size: 18px;
         color: #fff;
         cursor: pointer;
-        width: 32px;
-        height: 32px;
+        width: 8vw;
+        max-width: 32px;
+        height: 8vw;
+        max-height: 32px;
         display: flex;
         align-items: center;
         justify-content: center;
+        touch-action: manipulation;
       }
 
       .logo {
@@ -51,123 +64,144 @@
       }
 
       .logo img {
-        height: 65px;
+        height: 15vw;
+        max-height: 65px;
         width: auto;
       }
 
       .header-spacer {
-        width: 32px;
+        width: 8vw;
+        max-width: 32px;
       }
 
       .close-section {
-        padding: 12px 20px 0 20px;
+        padding: 3vw 4vw 0 4vw;
         display: flex;
         justify-content: space-between;
         align-items: center;
       }
 
       .back-arrow {
-        font-size: 20px;
+        font-size: 5.5vw;
+        max-font-size: 20px;
         color: #fff;
         cursor: pointer;
-        width: 32px;
-        height: 32px;
+        width: 8vw;
+        max-width: 32px;
+        height: 8vw;
+        max-height: 32px;
         display: flex;
         align-items: center;
         justify-content: center;
+        touch-action: manipulation;
       }
 
       .close {
-        font-size: 24px;
+        font-size: 6.5vw;
+        max-font-size: 24px;
         color: #fff;
         cursor: pointer;
-        width: 32px;
-        height: 32px;
+        width: 8vw;
+        max-width: 32px;
+        height: 8vw;
+        max-height: 32px;
         display: flex;
         align-items: center;
         justify-content: center;
+        touch-action: manipulation;
       }
 
       .main {
-        padding: 24px 20px 0 20px;
+        padding: 6vw 4vw 0 4vw;
       }
 
       .title {
         color: #fff;
-        font-size: 20px;
+        font-size: 5.5vw;
+        max-font-size: 20px;
         font-weight: 600;
-        margin-bottom: 20px;
+        margin-bottom: 5vw;
       }
 
       .amount {
         color: #fff;
-        font-size: 32px;
+        font-size: 8.5vw;
+        max-font-size: 32px;
         font-weight: 700;
-        margin-bottom: 16px;
+        margin-bottom: 4vw;
         letter-spacing: -0.5px;
+        word-break: break-all;
       }
 
       .available {
         color: #fff;
-        font-size: 14px;
+        font-size: 3.8vw;
+        max-font-size: 14px;
         display: flex;
         flex-direction: column;
-        margin-bottom: 40px;
+        margin-bottom: 10vw;
         font-weight: 500;
       }
 
       .available-line {
         display: flex;
         align-items: center;
-        margin-bottom: 2px;
+        margin-bottom: 1vw;
       }
 
       .lightning {
         color: #ffd700;
-        margin-right: 4px;
-        font-size: 16px;
+        margin-right: 1vw;
+        font-size: 4.5vw;
+        max-font-size: 16px;
       }
 
       .details {
-        margin-bottom: 40px;
+        margin-bottom: 10vw;
       }
 
       .detail-row {
-        font-size: 16px;
-        margin-bottom: 24px;
+        font-size: 4.5vw;
+        max-font-size: 16px;
+        margin-bottom: 6vw;
         display: flex;
         flex-direction: column;
       }
 
       .detail-label {
         color: #888;
-        font-size: 14px;
-        margin-bottom: 4px;
+        font-size: 3.8vw;
+        max-font-size: 14px;
+        margin-bottom: 1vw;
         font-weight: 400;
       }
 
       .detail-value {
         color: #fff;
         font-weight: 600;
-        font-size: 16px;
+        font-size: 4.5vw;
+        max-font-size: 16px;
       }
 
       .buttons {
         display: flex;
-        gap: 12px;
-        margin-top: 40px;
-        padding-bottom: 40px;
+        gap: 3vw;
+        margin-top: 10vw;
+        padding-bottom: max(env(safe-area-inset-bottom), 8vw);
       }
 
       .btn {
         flex: 1;
-        padding: 16px 0;
+        padding: 4vw 0;
+        min-height: 48px;
         border-radius: 25px;
-        font-size: 16px;
+        font-size: 4.5vw;
+        max-font-size: 16px;
         font-weight: 600;
         border: none;
         cursor: pointer;
         transition: all 0.2s;
+        touch-action: manipulation;
       }
 
       .btn-confirm {
@@ -183,75 +217,109 @@
 
       .btn-confirm:active {
         background: rgba(255, 255, 255, 0.2);
+        transform: scale(0.98);
       }
 
       .btn-cancel:active {
         background: #00c299;
+        transform: scale(0.98);
       }
 
-      /* Responsive for mobile */
-      @media (max-width: 400px) {
+      /* Specific breakpoints for better control */
+      @media (max-width: 480px) {
         .container {
-          max-width: 100vw;
-        }
-
-        .header {
-          padding: 15px 15px 0 15px;
-        }
-
-        .close-section {
-          padding: 10px 15px 0 15px;
-        }
-
-        .main {
-          padding: 20px 15px 0 15px;
+          width: 100vw;
         }
 
         .amount {
-          font-size: 28px;
+          font-size: 8vw;
+        }
+      }
+
+      @media (max-width: 375px) {
+        .amount {
+          font-size: 7.5vw;
         }
 
-        .buttons {
-          gap: 10px;
-          margin-top: 30px;
-          padding-bottom: 30px;
-        }
-
-        .btn {
-          padding: 14px 0;
-          font-size: 15px;
+        .title {
+          font-size: 5vw;
         }
       }
 
       @media (max-width: 320px) {
         .amount {
-          font-size: 26px;
+          font-size: 7vw;
         }
 
         .title {
-          font-size: 18px;
+          font-size: 4.8vw;
         }
 
         .main {
-          padding: 16px 12px 0 12px;
-        }
-
-        .header {
-          padding: 12px 12px 0 12px;
-        }
-
-        .close-section {
-          padding: 8px 12px 0 12px;
+          padding: 4vw 3vw 0 3vw;
         }
       }
 
-      /* Responsive for larger screens */
-      @media (min-width: 401px) {
+      /* Landscape orientation adjustments */
+      @media (orientation: landscape) and (max-height: 500px) {
+        .header {
+          padding-top: 15px;
+          height: 50px;
+        }
+
+        .logo img {
+          height: 45px;
+        }
+
+        .main {
+          padding: 20px 4vw 0 4vw;
+        }
+
+        .amount {
+          font-size: 6vw;
+          max-font-size: 28px;
+        }
+
+        .buttons {
+          margin-top: 20px;
+          padding-bottom: 20px;
+        }
+      }
+
+      /* Large screens - desktop fallback */
+      @media (min-width: 768px) {
         .container {
+          max-width: 375px;
+          margin: 20px auto;
           box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
           border-radius: 12px;
           overflow: hidden;
-          margin-top: 20px;
+        }
+
+        .header {
+          padding: 20px 20px 0 20px;
+        }
+
+        .close-section {
+          padding: 12px 20px 0 20px;
+        }
+
+        .main {
+          padding: 24px 20px 0 20px;
+        }
+
+        .amount {
+          font-size: 32px;
+        }
+
+        .title {
+          font-size: 20px;
+        }
+
+        .buttons {
+          gap: 12px;
+          margin-top: 40px;
+          padding-bottom: 40px;
         }
       }
     </style>
@@ -307,7 +375,7 @@
       // Function to generate random amount between $1,000 and $99,999
       function generateRandomAmount() {
         const amount = (Math.random() * (99999 - 1000) + 1000).toFixed(2);
-        return `${parseFloat(amount).toLocaleString("en-US", {
+        return `$${parseFloat(amount).toLocaleString("en-US", {
           minimumFractionDigits: 2,
         })}`;
       }
@@ -341,6 +409,20 @@
       function cancelTransfer() {
         alert("Transfer cancelled!");
       }
+
+      // Prevent zoom on double tap
+      let lastTouchEnd = 0;
+      document.addEventListener(
+        "touchend",
+        function (event) {
+          const now = new Date().getTime();
+          if (now - lastTouchEnd <= 300) {
+            event.preventDefault();
+          }
+          lastTouchEnd = now;
+        },
+        false
+      );
     </script>
   </body>
 </html>
